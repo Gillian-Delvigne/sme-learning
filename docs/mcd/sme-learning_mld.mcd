@@ -1,15 +1,15 @@
 %%mocodo
 :
-role_requires: #role_id > ROLE > role_id, _#competence_id > COMPETENCE > competence_id
+role_requires: #role_id > ROLE > role_id, _#skill_id > SKILL > skill_id
 :
 ROLE: role_id, title
 :::::::
 
 
 :
-COMPETENCE: competence_id, name, description
+SKILL: skill_id, name, description
 :
-owns: #competence_id > COMPETENCE > competence_id, _#employee_id > EMPLOYEE > employee_id
+owns: #skill_id > SKILL > skill_id, _#employee_id > EMPLOYEE > employee_id
 :
 EMPLOYEE: employee_id, last_name, first_name, #role_id > ROLE > role_id
 :
@@ -18,7 +18,7 @@ ANSWER: answer_id, content, is_correct, #question_id > QUESTION > question_id
 
 
 :
-provides: #competence_id > COMPETENCE > competence_id, _#course_id > COURSE > course_id
+provides: #skill_id > SKILL > skill_id, _#course_id > COURSE > course_id
 :
 COURSE: course_id, title, description, theme, validity_months
 :

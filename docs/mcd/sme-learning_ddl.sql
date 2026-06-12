@@ -19,13 +19,6 @@ CREATE TABLE ANSWER (
   question_id VARCHAR(42) NOT NULL
 );
 
-CREATE TABLE COMPETENCE (
-  PRIMARY KEY (competence_id),
-  competence_id VARCHAR(42) NOT NULL,
-  name          VARCHAR(42),
-  description   VARCHAR(42)
-);
-
 CREATE TABLE completes (
   PRIMARY KEY (employee_id, activity_id),
   employee_id  VARCHAR(42) NOT NULL,
@@ -51,9 +44,9 @@ CREATE TABLE EMPLOYEE (
 );
 
 CREATE TABLE owns (
-  PRIMARY KEY (competence_id, employee_id),
-  competence_id VARCHAR(42) NOT NULL,
-  employee_id   VARCHAR(42) NOT NULL
+  PRIMARY KEY (skill_id, employee_id),
+  skill_id    VARCHAR(42) NOT NULL,
+  employee_id VARCHAR(42) NOT NULL
 );
 
 CREATE TABLE prerequisites (
@@ -63,9 +56,9 @@ CREATE TABLE prerequisites (
 );
 
 CREATE TABLE provides (
-  PRIMARY KEY (competence_id, course_id),
-  competence_id VARCHAR(42) NOT NULL,
-  course_id     VARCHAR(42) NOT NULL
+  PRIMARY KEY (skill_id, course_id),
+  skill_id  VARCHAR(42) NOT NULL,
+  course_id VARCHAR(42) NOT NULL
 );
 
 CREATE TABLE QUESTION (
@@ -82,9 +75,16 @@ CREATE TABLE ROLE (
 );
 
 CREATE TABLE role_requires (
-  PRIMARY KEY (role_id, competence_id),
-  role_id       VARCHAR(42) NOT NULL,
-  competence_id VARCHAR(42) NOT NULL
+  PRIMARY KEY (role_id, skill_id),
+  role_id  VARCHAR(42) NOT NULL,
+  skill_id VARCHAR(42) NOT NULL
+);
+
+CREATE TABLE SKILL (
+  PRIMARY KEY (skill_id),
+  skill_id    VARCHAR(42) NOT NULL,
+  name        VARCHAR(42),
+  description VARCHAR(42)
 );
 
 CREATE TABLE subscribes_to (
@@ -105,17 +105,17 @@ ALTER TABLE completes ADD FOREIGN KEY (employee_id) REFERENCES EMPLOYEE (employe
 ALTER TABLE EMPLOYEE ADD FOREIGN KEY (role_id) REFERENCES ROLE (role_id);
 
 ALTER TABLE owns ADD FOREIGN KEY (employee_id) REFERENCES EMPLOYEE (employee_id);
-ALTER TABLE owns ADD FOREIGN KEY (competence_id) REFERENCES COMPETENCE (competence_id);
+ALTER TABLE owns ADD FOREIGN KEY (skill_id) REFERENCES SKILL (skill_id);
 
 ALTER TABLE prerequisites ADD FOREIGN KEY (course_id_2) REFERENCES COURSE (course_id);
 ALTER TABLE prerequisites ADD FOREIGN KEY (course_id_1) REFERENCES COURSE (course_id);
 
 ALTER TABLE provides ADD FOREIGN KEY (course_id) REFERENCES COURSE (course_id);
-ALTER TABLE provides ADD FOREIGN KEY (competence_id) REFERENCES COMPETENCE (competence_id);
+ALTER TABLE provides ADD FOREIGN KEY (skill_id) REFERENCES SKILL (skill_id);
 
 ALTER TABLE QUESTION ADD FOREIGN KEY (activity_id) REFERENCES ACTIVITY (activity_id);
 
-ALTER TABLE role_requires ADD FOREIGN KEY (competence_id) REFERENCES COMPETENCE (competence_id);
+ALTER TABLE role_requires ADD FOREIGN KEY (skill_id) REFERENCES SKILL (skill_id);
 ALTER TABLE role_requires ADD FOREIGN KEY (role_id) REFERENCES ROLE (role_id);
 
 ALTER TABLE subscribes_to ADD FOREIGN KEY (course_id) REFERENCES COURSE (course_id);

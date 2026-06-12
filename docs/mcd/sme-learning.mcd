@@ -1,16 +1,16 @@
-role_requires, 0N ROLE, 0N COMPETENCE
+role_requires, 0N ROLE, 0N SKILL
 ROLE: role_id, title
 has, 11 EMPLOYEE, 0N ROLE
 :
 :
 
-COMPETENCE: competence_id, name, description
-owns, 0N COMPETENCE, 0N EMPLOYEE
+SKILL: skill_id, name, description
+owns, 0N SKILL, 0N EMPLOYEE
 EMPLOYEE: employee_id, last_name, first_name,
 ANSWER: answer_id, content, is_correct
 proposes, 11 ANSWER, 1N QUESTION
 
-provides, 0N COMPETENCE, 0N COURSE
+provides, 0N SKILL, 0N COURSE
 COURSE: course_id, title, description, theme, validity_months
 subscribes_to, 0N EMPLOYEE, 0N COURSE: status, certification_date
 completes, 0N EMPLOYEE, 0N ACTIVITY: completed_at
