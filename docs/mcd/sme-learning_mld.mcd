@@ -1,0 +1,37 @@
+%%mocodo
+:
+role_requires: #role_id > ROLE > role_id, _#competence_id > COMPETENCE > competence_id
+:
+ROLE: role_id, title
+:::::::
+
+
+:
+COMPETENCE: competence_id, name, description
+:
+owns: #competence_id > COMPETENCE > competence_id, _#employee_id > EMPLOYEE > employee_id
+:
+EMPLOYEE: employee_id, last_name, first_name, #role_id > ROLE > role_id
+:
+ANSWER: answer_id, content, is_correct, #question_id > QUESTION > question_id
+:::
+
+
+:
+provides: #competence_id > COMPETENCE > competence_id, _#course_id > COURSE > course_id
+:
+COURSE: course_id, title, description, theme, validity_months
+:
+subscribes_to: #employee_id > EMPLOYEE > employee_id, _#course_id > COURSE > course_id, status, certification_date
+:
+completes: #employee_id > EMPLOYEE > employee_id, _#activity_id > ACTIVITY > activity_id, completed_at
+:
+QUESTION: question_id, statement, #activity_id > ACTIVITY > activity_id
+:
+
+
+:::
+prerequisites: #course_id 1 > COURSE > course_id, _#course_id 2 > COURSE > course_id
+:::
+ACTIVITY: activity_id, title, type, sequence, content, pass_threshold, #course_id > COURSE > course_id
+:::
