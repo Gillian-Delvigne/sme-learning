@@ -1,6 +1,8 @@
-from base import Base, TimestampMixin
+from .base import Base, TimestampMixin
+from .associations import employee_skill
 from sqlalchemy import Column, Uuid, String, ForeignKey
 from sqlalchemy.orm import relationship
+
 
 class Employee(TimestampMixin, Base):
     __tablename__ = "employees"
@@ -11,3 +13,5 @@ class Employee(TimestampMixin, Base):
     role_id = Column(Uuid, ForeignKey("roles.id"), nullable=False)
 
     role = relationship("Role", back_populates="employees")
+    skills = relationship("Skill", secondary=employee_skill, back_populates="employees")
+    enrollments = relationship("Enrollment", back_populates="employee")

@@ -1,5 +1,5 @@
 import enum
-from base import Base, TimestampMixin
+from .base import Base, TimestampMixin
 from sqlalchemy import Column, ForeignKey, Enum as SQLA_ENUM, Uuid, String, Integer
 from sqlalchemy.orm import relationship
 
